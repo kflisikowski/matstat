@@ -1,0 +1,111 @@
+---
+output:
+  reprex::reprex_document:
+    venue: "gh"
+    advertise: FALSE
+    session_info: TRUE
+    style: TRUE
+    comment: "#;-)"
+    tidyverse_quiet: FALSE
+    std_out_err: TRUE
+knit: reprex::reprex_render
+---
+
+## Sample data
+
+
+```{r}
+# Load necessary libraries
+library(tidyverse)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate sample data
+n <- 1000  # Number of observations
+
+# Age between 18 and 90
+age <- sample(18:90, n, replace = TRUE)
+
+# Introduce errors in age column
+age[sample(1:n, 50)] <- "InvalidAge"
+
+# Workclass: Private, Self-emp-not-inc, Self-emp-inc, Federal-gov, Local-gov, State-gov, Without-pay, Never-worked
+workclass <- sample(c("Private", "Self-emp-not-inc", "Self-emp-inc", "Federal-gov", "Local-gov", "State-gov", "Without-pay", "Never-worked"), n, replace = TRUE)
+
+# Introduce missing values in workclass column
+workclass[sample(1:n, 50)] <- NA
+
+# Education: Bachelors, Some-college, 11th, HS-grad, Prof-school, Assoc-acdm, Assoc-voc, 9th, 7th-8th, 12th, Masters, 1st-4th, 10th, Doctorate, 5th-6th, Preschool
+education <- sample(c("Bachelors", "Some-college", "11th", "HS-grad", "Prof-school", "Assoc-acdm", "Assoc-voc", "9th", "7th-8th", "12th", "Masters", "1st-4th", "10th", "Doctorate", "5th-6th", "Preschool"), n, replace = TRUE)
+
+# Introduce inconsistencies in education column
+education[sample(1:n, 50)] <- "InvalidEducation"
+
+# Education Number: 1-16
+education_num <- sample(1:16, n, replace = TRUE)
+
+# Marital Status: Married-civ-spouse, Divorced, Never-married, Separated, Widowed, Married-spouse-absent, Married-AF-spouse
+marital_status <- sample(c("Married-civ-spouse", "Divorced", "Never-married", "Separated", "Widowed", "Married-spouse-absent", "Married-AF-spouse"), n, replace = TRUE)
+
+# Introduce missing values in marital_status column
+marital_status[sample(1:n, 50)] <- NA
+
+# Occupation: Tech-support, Craft-repair, Other-service, Sales, Exec-managerial, Prof-specialty, Handlers-cleaners, Machine-op-inspct, Adm-clerical, Farming-fishing, Transport-moving, Priv-house-serv, Protective-serv, Armed-Forces
+occupation <- sample(c("Tech-support", "Craft-repair", "Other-service", "Sales", "Exec-managerial", "Prof-specialty", "Handlers-cleaners", "Machine-op-inspct", "Adm-clerical", "Farming-fishing", "Transport-moving", "Priv-house-serv", "Protective-serv", "Armed-Forces"), n, replace = TRUE)
+
+# Introduce errors in occupation column
+occupation[sample(1:n, 50)] <- "InvalidOccupation"
+
+# Relationship: Wife, Own-child, Husband, Not-in-family, Other-relative, Unmarried
+relationship <- sample(c("Wife", "Own-child", "Husband", "Not-in-family", "Other-relative", "Unmarried"), n, replace = TRUE)
+
+# Introduce missing values in relationship column
+relationship[sample(1:n, 50)] <- NA
+
+# Race: White, Asian-Pac-Islander, Amer-Indian-Eskimo, Other, Black
+race <- sample(c("White", "Asian-Pac-Islander", "Amer-Indian-Eskimo", "Other", "Black"), n, replace = TRUE)
+
+# Introduce inconsistencies in race column
+race[sample(1:n, 50)] <- "InvalidRace"
+
+# Sex: Female, Male
+sex <- sample(c("Female", "Male"), n, replace = TRUE)
+
+# Introduce missing values in sex column
+sex[sample(1:n, 50)] <- NA
+
+# Capital Gain: 0-99999
+capital_gain <- sample(0:99999, n, replace = TRUE)
+
+# Introduce errors in capital_gain column
+capital_gain[sample(1:n, 50)] <- -999
+
+# Capital Loss: 0-99999
+capital_loss <- sample(0:99999, n, replace = TRUE)
+
+# Introduce errors in capital_loss column
+capital_loss[sample(1:n, 50)] <- -999
+
+# Hours per week: 1-99
+hours_per_week <- sample(1:99, n, replace = TRUE)
+
+# Introduce missing values in hours_per_week column
+hours_per_week[sample(1:n, 50)] <- NA
+
+# Native country: United-States, Cambodia, England, ...
+native_country <- sample(c("United-States", "Cambodia", "England", "Puerto-Rico", "Canada", "Germany", "Outlying-US(Guam-USVI-etc)", "India", "Japan", "Greece", "South", "China", "Cuba", "Iran", "Honduras", "Philippines", "Italy", "Poland", "Jamaica", "Vietnam", "Mexico", "Portugal", "Ireland", "France", "Dominican-Republic", "Laos", "Ecuador", "Taiwan", "Haiti", "Columbia", "Hungary", "Guatemala", "Nicaragua", "Scotland", "Thailand", "Yugoslavia", "El-Salvador", "Trinadad&Tobago", "Peru", "Hong", "Holand-Netherlands"), n, replace = TRUE)
+
+# Introduce missing values in native_country column
+native_country[sample(1:n, 50)] <- NA
+
+# Income: <=50K, >50K
+income <- sample(c("<=50K", ">50K"), n, replace = TRUE, prob = c(0.75, 0.25))
+
+# Create dataframe
+sample_dirty_dataset <- data.frame(age, workclass, education, education_num, marital_status, occupation, relationship, race, sex, capital_gain, capital_loss, hours_per_week, native_country, income)
+
+# Print first few rows of the dataset
+head(sample_dirty_dataset)
+```
+
